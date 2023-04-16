@@ -1,0 +1,17 @@
+@import "../vars";
+
+.nice-loading-card {
+    .card-action {
+        padding: 6px 24px;
+
+        .error {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            span {
+                flex-grow: 1;
+                text-align: start;
+            }
+        }
+    }
+}

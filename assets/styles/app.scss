@@ -1,0 +1,61 @@
+@import "../../node_modules/@materializecss/materialize/sass/materialize.scss";
+body {
+    background-color: lightgray;
+}
+
+.absolutCenter {
+    display: flex;
+    height: 100svh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    margin: 0!important;
+    div.col {
+        margin: 0 !important;
+    }
+}
+
+.borderIndeterminate {
+    position: relative;
+    z-index: 2;
+
+    * {
+        z-index: 1;
+    }
+
+    .card-action {
+        padding: 10px 24px;
+        background: none;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: -2;
+        width: 300%;
+        height: 300%;
+        transform: translate(-50%, -50%);
+        background-color: #399953;
+        background-repeat: no-repeat;
+        background-image: conic-gradient(#399953,#fbb300,#d53e33,#377af5);
+        animation: rotate 4s linear infinite;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 6px;
+        top: 6px;
+        width: calc(100% - 12px);
+        height: calc(100% - 12px);
+        background-color: white;
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}

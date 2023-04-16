@@ -1,0 +1,79 @@
+@import "../vars";
+
+.axs-sidebar {
+    background-color: $sidebar_bg;
+    height: 100svh;
+    width: $sidebar_width;
+    color: #aaa;
+    transition: all ease-in-out 250ms;
+    position: fixed;
+
+    &.collapsed {
+        width: $sidebar_collapsed_width;
+        .header #brand-name, .item .label {
+            opacity: 0;
+            flex-grow: 0;
+            width: 0;
+            pointer-events: none;
+            padding: 0;
+        }
+        
+    }
+    .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        white-space: nowrap;
+        padding: 10px;
+
+        #brand-name {
+            font-size: 1.5rem;
+            flex-grow: 1;
+            width: 100px;
+            transition: all 250ms ease-in-out;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            img {
+                margin-right: 10px;
+            }
+        }
+        #collapse-button {
+            color: #aaa;
+            background-color: lighten($sidebar_bg, 5);
+        }
+    }
+
+    .item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        padding: 5px 18px;
+        margin: 5px 0;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #aaaaaa22;
+        }
+        
+        .icon {
+            font-size: 2.2rem;
+        }
+        .label {
+            flex-grow: 1;
+            padding-left: 20px;
+            width: 10px;
+            white-space: nowrap;
+            transition: all 250ms ease-in-out;
+        }
+    }
+}
+
+main.sidebar {
+    padding-left: $sidebar_width;
+    transition: all 250ms ease-in-out;
+    &.collapsed {
+        padding-left: $sidebar_collapsed_width;
+    }
+}

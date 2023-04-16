@@ -1,0 +1,38 @@
+@import "../vars";
+#shortcutPanel {
+    nav {
+        background-color: $sidebar_bg;
+        .search {
+            input {
+                width: 100%;
+                height: 64px;
+                padding: 0 30px;
+                background-color: transparent;
+                transition: all 250ms ease-in-out;
+                border: none;
+                &:focus {
+                    background-color: white;
+                }
+            }
+        }
+    }
+    .modal-content {
+        padding: 0;
+    }
+    .shortcut {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 5px 10px;
+        border-bottom: 1px solid #ddd;
+
+        &.active {
+            background-color: $sidebar_bg;
+            color: #ddd;
+        }
+
+        .description {
+            flex-grow: 1;
+        }
+    }
+}
