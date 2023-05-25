@@ -1,0 +1,10 @@
+.tooltipped {
+    &::after {
+        font-family: "Material Icons";
+        content: "info";
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 3px;
+        margin-left: 3px;
+    }
+}

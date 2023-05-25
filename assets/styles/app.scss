@@ -15,47 +15,67 @@ body {
     }
 }
 
-.borderIndeterminate {
-    position: relative;
-    z-index: 2;
-
-    * {
-        z-index: 1;
-    }
-
-    .card-action {
-        padding: 10px 24px;
-        background: none;
-    }
-
-    &::before {
-        content: "";
-        position: absolute;
-        z-index: -2;
-        width: 300%;
-        height: 300%;
-        transform: translate(-50%, -50%);
-        background-color: #399953;
-        background-repeat: no-repeat;
-        background-image: conic-gradient(#399953,#fbb300,#d53e33,#377af5);
-        animation: rotate 4s linear infinite;
-    }
-    &::after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        left: 6px;
-        top: 6px;
-        width: calc(100% - 12px);
-        height: calc(100% - 12px);
-        background-color: white;
-    }
+form.row {
+    margin-bottom: 0 !important;
 }
-@keyframes rotate {
+
+.animationFromTopSlide {
+    animation: fromTopSlide 750ms ease-out ;
+}
+
+.animationTelevisionOff {
+    overflow: hidden;
+    animation: televisionOff 500ms cubic-bezier(.71,-0.61,.41,1.73) forwards;
+}
+.animationTelevisionOn {
+    overflow: hidden;
+    animation: televisionOn 500ms cubic-bezier(.71,-0.61,.41,1.73) forwards;
+}
+
+@keyframes fromTopSlide {
     0% {
-        transform: translate(-50%, -50%);
+        transform: translateY(-80px);
+        opacity: 0;
     }
     100% {
-        transform: translate(-50%, -50%);
+        transform: translateY(0);
+        opacity: 1;
     }
+}
+
+@keyframes televisionOff {
+    0% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0;
+        height: 0;
+        visibility: hidden;
+    }
+    100% {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes televisionOn {
+    0% {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        visibility: hidden;
+    }
+    15% {
+        opacity: 0;
+        height: 0;
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.card-action {
+    padding: 5px 24px !important;
 }

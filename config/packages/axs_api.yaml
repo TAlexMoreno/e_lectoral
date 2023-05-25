@@ -1,0 +1,6 @@
+axs_api:
+  security:
+    api_secret: bdf50b26-a2f3-480b-bb34-91d80fdf761e 
+    user_entity: "App\\Entity\\Usuario"
+    user_uid: "email"
+    exp_defer: 72

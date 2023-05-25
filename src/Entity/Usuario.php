@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Enums\EstadosUsuario;
 use App\Repository\UsuarioRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,6 +28,27 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lastIP = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $lastAccess = null;
+
+    #[ORM\Column(type: Types::SMALLINT, options: ["comment" => "0: just created, 1: operative, 2: lost access, 3: blocked"])]
+    private ?int $estatus = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $recuperationCode = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\OneToOne(mappedBy: 'usuario', cascade: ['persist', 'remove'])]
+    private ?Promotor $promotor = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $correo = null;
 
     public function getId(): ?int
     {
@@ -95,5 +118,94 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLastIP(): ?string
+    {
+        return $this->lastIP;
+    }
+
+    public function setLastIP(?string $lastIP): self
+    {
+        $this->lastIP = $lastIP;
+
+        return $this;
+    }
+
+    public function getLastAccess(): ?\DateTimeInterface
+    {
+        return $this->lastAccess;
+    }
+
+    public function setLastAccess(?\DateTimeInterface $lastAccess): self
+    {
+        $this->lastAccess = $lastAccess;
+
+        return $this;
+    }
+
+    public function getEstatus(): ?EstadosUsuario
+    {
+        return EstadosUsuario::tryFrom($this->estatus);
+    }
+
+    public function setEstatus(EstadosUsuario $estatus): self
+    {
+        $this->estatus = $estatus->value;
+
+        return $this;
+    }
+
+    public function getRecuperationCode(): ?string
+    {
+        return $this->recuperationCode;
+    }
+
+    public function setRecuperationCode(?string $recuperationCode): self
+    {
+        $this->recuperationCode = $recuperationCode;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getPromotor(): ?Promotor
+    {
+        return $this->promotor;
+    }
+
+    public function setPromotor(Promotor $promotor): self
+    {
+        // set the owning side of the relation if necessary
+        if ($promotor->getUsuario() !== $this) {
+            $promotor->setUsuario($this);
+        }
+
+        $this->promotor = $promotor;
+
+        return $this;
+    }
+
+    public function getCorreo(): ?string
+    {
+        return $this->correo;
+    }
+
+    public function setCorreo(string $correo): self
+    {
+        $this->correo = $correo;
+
+        return $this;
     }
 }

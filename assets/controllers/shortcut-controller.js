@@ -23,7 +23,14 @@ export default class extends Controller {
                 this.modalElement.querySelector("#searchCommand").focus();
             }
         });
+        this.button = document.createElement("button")
+        this.button.classList.add("btn-flat");
+        this.button.id = "shortcut-button";
+        this.button.innerHTML = /*html*/ `<i class="material-icons">keyboard</i>`;
+        this.button.onclick = () => this.modal.open();
+        
         document.body.appendChild(this.modalElement);
+        document.body.appendChild(this.button);
 
         this.scHandler = new SCHandler(this.updateCommands.bind(this));
         this.scHandler.addElement(new SCElement({

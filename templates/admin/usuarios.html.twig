@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+{% set sidebar = "yes" %}
+{% set shortcuts = "yes" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Usuarios</span>
+                    <div 
+                        data-controller="super-list"
+                        data-super-list-url-value="/API/Usuario"
+                        data-super-list-token-value="{{app.session.get('api_token')}}"
+                        data-super-list-columnas-value='{
+                            "username": "Nombre de usuario",
+                            "nivel": "Nivel de usuario",
+                            "estatus": "Estado",
+                            "lastAccess": "Último acceso", 
+                            "lastIP": "Última IP",
+                            "acciones": "Acciones"
+                        }'
+                        data-super-list-classes-value='["centered", "compact"]'
+                    ></div>
+                </div>
+                <div class="card-action right-align">
+                    <a href="/admin/usuarios/nuevo" class="btn"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.cell = (td, col, data)=>{
+            if (col === "username"){
+                return /*html*/ `<a href="/admin/usuarios/${data.username}">${data.username}</a>`;
+            }
+            if (col === "nivel"){
+                return /*html*/ `${data.roles[0].split("_")[1]}`;
+            }
+            if (col === "estatus"){
+                switch(data.estatus){
+                    case 0: return `<div data-controller="tooltip" data-position="right" data-tooltip="Sin primer acceso">Creado</div>`;
+                    case 1: return `<div data-controller="tooltip" data-position="right" data-tooltip="Sin problemas">Operativo</div>`;
+                    case 2: return `<div data-controller="tooltip" data-position="right" data-tooltip="Ha iniciado proceso de recuperación de contraseña">Recuperando</div>`;
+                    case 3: return `<div data-controller="tooltip" data-position="right" data-tooltip="Bloqueado por administrador">Bloqueado</div>`;
+                }
+            }
+            if (col === "lastAccess"){
+                let date = new Date(data[col]);
+                return date.toLocaleString("es-MX", {dateStyle: "medium", timeStyle: "short"});
+            }
+            if (col === "acciones"){
+                let login = data.id != {{app.user.id}} ? /*html*/ `<button class="btn"><i class="material-icons">login</i></button>` : "";
+                return /*html*/ `${login}`;
+            }
+            return data[col] ?? "--"
+        }
+    </script>
+{% endblock %}

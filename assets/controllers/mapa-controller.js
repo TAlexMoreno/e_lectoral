@@ -17,7 +17,6 @@ const colors = [
     {light: "#f48fb1", dark: "#880e4f"},
     {light: "#ce93d8", dark: "#4a148c"},
     {light: "#b39ddb", dark: "#311b92"},
-    {light: "#9fa8da", dark: "#1a237e"},
     {light: "#90caf9", dark: "#0d47a1"},
     {light: "#81d4fa", dark: "#01579b"},
     {light: "#80deea", dark: "#006064"},
@@ -35,17 +34,17 @@ const colors = [
 ]
 
 const distritos = {
-    "01": ["006", "020", "021", "060"],
+    "01": ["006", "020", "021", "060", "045"],
     "02": ["011", "034", "043"],
-    "03": ["004", "030", "031", "039", "055", "054"],
-    "04": ["003"],
+    "03": ["003", "030", "031", "039", "055", "054", "047", "046"],
+    "04": ["005"],
     "05": ["001", "002", "024", "036", "040"],
     "06": ["012", "014", "015", "019", "020", "055"],
     "07": ["033"],
     "08": ["009", "018", "026", "038", "050"],
-    "09": ["010", "052"],
+    "09": ["010", "052", "048"],
     "10": ["013", "016", "035", "037"],
-    "11": ["005", "007", "008", "013"],
+    "11": ["004", "007", "008", "013"],
     "12": ["049", "032", "051", "053", "029", "060", "022", "028", "051"],
     "13": ["056", "023", "057", "044", "054"],
     "14": ["042", "058", "059", "041", "017", "027"],
@@ -53,13 +52,13 @@ const distritos = {
 }
 
 export default class extends Controller {
-    initialize(){
+    async initialize(){
         useGeographic();
         this.element.classList.add('mapa-container');
         this.estadoLayer = new VectorLayer({
             source: new VectorSource({
                 format: new GeoJSON(),
-                url: "https://gaia.inegi.org.mx/wscatgeo/geo/mgem/29"
+                url: "/geoJSON/mgem_29.geojson"
             }),
             style: (feature) => {
                 return this.baseStyle(feature);

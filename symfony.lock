@@ -1,4 +1,7 @@
 {
+    "axs/api-bundle": {
+        "version": "dev-main"
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {

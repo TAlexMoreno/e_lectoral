@@ -1,0 +1,11 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_row %}
+    <div class="input-field col {{form.vars.attr.col|default("s12")}}">
+        {% if form.vars.attr.icon is defined %}
+            <i class="material-icons prefix">{{form.vars.attr.icon}}</i>
+        {% endif %}
+        {{form_widget(form)}}
+        {{form_label(form)}}
+    </div>
+{% endblock %}

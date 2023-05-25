@@ -12,17 +12,24 @@ export default class extends Controller {
         this.element.classList.add("axs-sidebar");
         this.element.innerHTML = /*html*/`
             <div class="header">
-                <div id="brand-name"><img src="/img/white_logo_small.png" alt="logo"><span>Grand Ticket</span></div>
+                <div id="brand-name"><span>e@lectoral</span></div>
                 <button id="collapse-button" class="btn-flat btn-small"><i class="material-icons">arrow_back_ios</i></button>
             </div>
             <div class="menus"></div>
         `;
         this.collapseButton = this.element.querySelector("#collapse-button");
         this.collapseButton.onclick = () => this.toggle();
-
+        this.menus = null;
         this.getRutas().then(menus => {
+            this.menus = menus;
             menus.forEach(menu => {
                 let menuElement = document.createElement("div");
+                let test = new RegExp(`${menu.path.replace("/", "\/")}\/?(\\w+\/?)*`);
+                if (menu.path == "/") {
+                    if (window.location.pathname == "/") menuElement.classList.add("active");
+                } else if (test.test(window.location.pathname)) {
+                    menuElement.classList.add("active");
+                }
                 menuElement.classList.add("item");
                 menuElement.innerHTML = /*html*/`
                     <i class="material-icons icon">${menu.icon}</i>
@@ -42,7 +49,7 @@ export default class extends Controller {
      * 
      * @param {CustomEvent} ev
      */
-    addShortcuts(ev){
+    async addShortcuts(ev){
         /** @type {SCHandler} */
         this.sch = ev.detail;
         this.sch.addElement(new SCElement({
@@ -52,8 +59,18 @@ export default class extends Controller {
                 this.toggle();
             }
         }));
-    
-        
+        if (!this.menus) this.menus = await this.getRutas();
+        let i = 1;
+        for (const menu of this.menus) {
+            this.sch.addElement(new SCElement({
+                keyComb: "ctrl+alt+" + i,
+                description: "Navegar a " + menu.label,
+                callback: () => {
+                    window.location.href = menu.path;
+                }
+            }));
+            i += 1;
+        }
     }
     toggle(){
         this.collapsedValue = !this.collapsedValue;
@@ -89,6 +106,6 @@ class MenuItem {
         this.path = "";
         this.label = "";
         this.icon = "";
-        this.order = 0;
+        this.orden = 0;
     }
 }

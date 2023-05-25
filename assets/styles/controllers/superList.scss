@@ -1,0 +1,47 @@
+.super-list {
+    tr {
+        animation: insert 250ms ease-out forwards;
+        animation-delay: var(--delay);
+        opacity: 0;
+    }
+    tfoot {
+        td {
+            padding: 0;
+        }
+        .footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .input-field {
+                margin: 0;
+            }
+            .indicator {
+                white-space: nowrap;
+                padding: 0 1rem;
+                border-right: 1px solid #ccc;
+            }
+            .pagination {
+                flex-grow: 1;
+            }
+        }
+    }
+}
+
+@keyframes insert {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+table.compact {
+    td {
+        padding: 5px !important;
+    }
+}

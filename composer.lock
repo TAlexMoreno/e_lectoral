@@ -4,8 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8bee4b7d54062b0b74d30a3367e83b9",
+    "content-hash": "83ed59269f0e3e3124529021c35bfb01",
     "packages": [
+        {
+            "name": "axs/api-bundle",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TAlexMoreno/AXSApiBundle.git",
+                "reference": "d77fc173a1b2c4b9d51caa32ed05d10f633b0284"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TAlexMoreno/AXSApiBundle/zipball/d77fc173a1b2c4b9d51caa32ed05d10f633b0284",
+                "reference": "d77fc173a1b2c4b9d51caa32ed05d10f633b0284",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/framework-bundle": "^6.1",
+                "symfony/orm-pack": "^2.2",
+                "symfony/security-bundle": "^6.1"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "AXS\\ApiBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Alejandro Moreno Tapia",
+                    "email": "alex.mt.10@gmail.com"
+                }
+            ],
+            "description": "Añade funcionalidades de api al modelo de datos ORM de doctrine",
+            "support": {
+                "issues": "https://github.com/TAlexMoreno/AXSApiBundle/issues",
+                "source": "https://github.com/TAlexMoreno/AXSApiBundle/tree/main"
+            },
+            "time": "2023-02-20T00:29:56+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "2.0.1",
@@ -4706,6 +4747,51 @@
                 }
             ],
             "time": "2023-02-14T08:44:56+00:00"
+        },
+        {
+            "name": "symfony/orm-pack",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/orm-pack.git",
+                "reference": "498e2f554a1a0ac0a776cd348c9150a186383075"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/orm-pack/zipball/498e2f554a1a0ac0a776cd348c9150a186383075",
+                "reference": "498e2f554a1a0ac0a776cd348c9150a186383075",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "*",
+                "doctrine/doctrine-migrations-bundle": "*",
+                "doctrine/orm": "*"
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for the Doctrine ORM",
+            "support": {
+                "issues": "https://github.com/symfony/orm-pack/issues",
+                "source": "https://github.com/symfony/orm-pack/tree/v2.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-12-05T14:15:35+00:00"
         },
         {
             "name": "symfony/password-hasher",
@@ -9656,7 +9742,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "axs/api-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
