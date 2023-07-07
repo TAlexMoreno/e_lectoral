@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+{% set sidebar = "yes" %}
+{% set shortcuts = "yes" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Partidos</span>
+                    <div 
+                        data-controller="super-list"
+                        data-super-list-url-value="/API/Partido"
+                        data-super-list-token-value="{{app.session.get('api_token')}}"
+                        data-super-list-columnas-value='{
+                            "id": "#",
+                            "siglas": "Siglas",
+                            "nombre": "Nombre"
+                        }'
+                        data-super-list-classes-value='["centered", "compact"]'
+                    ></div>
+                </div>
+                <div class="card-action right-align">
+                    <a href="/admin/partidos/nuevo" class="btn"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.cell = (td, col, data) => {
+            if (col == "id"){
+                return `<a href="/admin/partidos/${data[col]}"><img class="img-small" src="/admin/partidos/${data[col]}/foto"/></a>`;
+            }
+            return data[col];
+        }
+    </script>
+{% endblock %}

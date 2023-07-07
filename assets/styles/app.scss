@@ -2,7 +2,14 @@
 body {
     background-color: lightgray;
 }
-
+.absCenter {
+    display: flex;
+    height: 100svh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    margin: 0!important;
+}
 .absolutCenter {
     display: flex;
     height: 100svh;
@@ -78,4 +85,21 @@ form.row {
 }
 .card-action {
     padding: 5px 24px !important;
+}
+.user-card-title {
+    img {
+        max-height: 64px;
+    }
+    span {
+        flex-grow: 1;
+        margin-left: 5px;
+        font-size: x-large;
+        color: #333333;
+    }
+}
+.noMarginBottom {
+    margin-bottom: 0 !important;
+}
+.img-small {
+    max-height: 32px;
 }

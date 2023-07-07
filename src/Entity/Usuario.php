@@ -50,6 +50,9 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $correo = null;
 
+    #[ORM\ManyToOne(inversedBy: 'usuarios')]
+    private ?Partido $partido = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -207,5 +210,36 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
         $this->correo = $correo;
 
         return $this;
+    }
+
+    public function getPartido(): ?Partido
+    {
+        return $this->partido;
+    }
+
+    public function setPartido(?Partido $partido): self
+    {
+        $this->partido = $partido;
+
+        return $this;
+    }
+
+    public function getProfilePicName(): string{
+        return "[{$this->id}]{$this->username}";
+    }
+
+    public function serialize(): array {
+        return [
+            "id" => $this->id,
+            "username" => $this->username,
+            "roles" => $this->roles,
+            "password" => $this->password,
+            "lastIP" => $this->lastIP,
+            "lastAccess" => $this->lastAccess,
+            "estatus" => $this->estatus,
+            "createdAt" => $this->createdAt,
+            "correo" => $this->correo,
+            "partido" => $this->partido?->serialize(),
+        ];
     }
 }

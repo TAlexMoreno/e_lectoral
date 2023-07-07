@@ -21,4 +21,9 @@ class Index extends AbstractController {
         });
         return $this->json(["success" => true, "rutas" => $rutas]);
     }
+
+    #[Route("/checkSession", name: "app_check_session", methods:["POST"])]
+    public function checkSession(){
+        return $this->json(["session" => $this->getUser() ? true : false]);
+    }
 }

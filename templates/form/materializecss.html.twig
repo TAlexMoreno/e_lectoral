@@ -9,3 +9,25 @@
         {{form_label(form)}}
     </div>
 {% endblock %}
+
+{% block choice_row %}
+    <div data-controller="material-select" class="input-field col {{form.vars.attr.col|default("s12")}}">
+        {% if form.vars.attr.icon is defined %}
+            <i class="material-icons prefix">{{form.vars.attr.icon}}</i>
+        {% endif %}
+        {{form_widget(form)}}
+        {{form_label(form)}}
+    </div>
+{% endblock %}
+
+{% block file_row %}
+    <div data-controller="material-select" class="file-field input-field col {{form.vars.attr.col|default("s12")}}">
+        <div class="btn">
+            <span>{{form.vars.label|default(name)}}</span>
+            <input name="{{form.vars.full_name}}" id="{{form.vars.id}}" type="file">
+        </div>
+        <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+        </div>
+    </div>
+{% endblock %}

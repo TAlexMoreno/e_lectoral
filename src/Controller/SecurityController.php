@@ -17,7 +17,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response{
         /** @var App\Entity\Usuario $user */
         $user = $this->getUser();
-        if ($user) return $user->getEstatus == EstadosUsuario::Operative ? $this->redirectToRoute('app_index') : $this->redirect("change_pass");
+        if ($user) return $user->getEstatus() == EstadosUsuario::Operative ? $this->redirectToRoute('app_index') : $this->redirect("change_pass");
         
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();

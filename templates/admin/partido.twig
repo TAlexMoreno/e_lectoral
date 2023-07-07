@@ -8,13 +8,13 @@
             <div data-controller="nice-loading-card" class="card">
                 <div class="card-content">
                     <div class="user-card-title row noMarginBottom valign-wrapper">
-                        <span>{{user.username}}</span>
-                        <img class="circle responsive-img user-card-photo" src="{{ url("foto_perfil", {"username":user.username}) }}" alt="Foto de perfil">
+                        <span>{{partido.siglas}}</span>
+                        <img class="responsive-img user-card-photo" src="{{ url("partido_foto", {"id":partido.id}) }}" alt="Foto de perfil">
                     </div>
-                    <form id="usuario-form" action="/admin/usuarios/nuevo" method="POST" class="row noMarginButton">{{form_widget(form)}}</form>
+                    <form id="partido-form" action="/admin/partidos/nuevo" method="POST" class="row noMarginButton">{{form_widget(form)}}</form>
                 </div>
                 <div class="card-action right-align">
-                    <button type="submit" form="usuario-form" class="btn"><i class="material-icons">save</i></button>
+                    <button type="submit" form="partido-form" class="btn"><i class="material-icons">save</i></button>
                 </div>
             </div>
         </div>

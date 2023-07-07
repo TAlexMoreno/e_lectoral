@@ -13,10 +13,11 @@
                         data-super-list-url-value="/API/Usuario"
                         data-super-list-token-value="{{app.session.get('api_token')}}"
                         data-super-list-columnas-value='{
+                            "partido": "Partido",
                             "username": "Nombre de usuario",
                             "nivel": "Nivel de usuario",
                             "estatus": "Estado",
-                            "lastAccess": "Último acceso", 
+                            "lastAccess": "Último acceso",
                             "lastIP": "Última IP",
                             "acciones": "Acciones"
                         }'
@@ -32,6 +33,9 @@
 
     <script>
         window.cell = (td, col, data)=>{
+            if (col === "partido") {
+                return data.partido ? /*html*/ `<img src="/admin/partidos/${data.partido.id}/foto" class="img-small" title="${data.partido.siglas}" alt="partido" />` : "--";
+            }
             if (col === "username"){
                 return /*html*/ `<a href="/admin/usuarios/${data.username}">${data.username}</a>`;
             }
@@ -48,13 +52,16 @@
             }
             if (col === "lastAccess"){
                 let date = new Date(data[col]);
-                return date.toLocaleString("es-MX", {dateStyle: "medium", timeStyle: "short"});
+                return data[col] ? date.toLocaleString("es-MX", {dateStyle: "medium", timeStyle: "short"}) : "--";
             }
             if (col === "acciones"){
-                let login = data.id != {{app.user.id}} ? /*html*/ `<button class="btn"><i class="material-icons">login</i></button>` : "";
+                let login = data.id != {{app.user.id}} ? /*html*/ `<a class="btn-small" href="/?_switch_user=${data["username"]}"><i class="material-icons">login</i></a>` : "--";
                 return /*html*/ `${login}`;
             }
             return data[col] ?? "--"
+        }
+        window.row = (tr, data) => {
+            
         }
     </script>
 {% endblock %}

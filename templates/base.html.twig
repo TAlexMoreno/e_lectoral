@@ -16,6 +16,7 @@
     <body>
         {% if (sidebar|default('yes')) == 'yes' %}
             <div data-controller='sidebar'></div>
+            <div data-controller="check-session"></div>
         {% endif %}
         {% if (shortcuts|default('yes')) == 'yes' %}
             <div data-controller='shortcut'></div>

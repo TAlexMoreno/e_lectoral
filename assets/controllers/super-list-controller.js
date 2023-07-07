@@ -301,6 +301,7 @@ export default class extends Controller {
             })
         });
         if (fetchResponse.status != 200){
+            console.error(fetchResponse);
             return;
         }
         let response = await fetchResponse.json();
@@ -328,7 +329,7 @@ export default class extends Controller {
         }else {
             this.noResultRow.classList.remove("hide");
         }
-        this.tableBody.querySelectorAll("tr:not(#notResultRow)").forEach(el => {
+        this.tableBody.querySelectorAll("tr:not(#noResultRow)").forEach(el => {
             el.remove();
         })
         let delay = 0;

@@ -27,3 +27,6 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 /migrations/
+/files/img/partidos/*
+/files/geojson/municipios/*
+/files/geojson/secciones/*

@@ -1,10 +1,11 @@
 .tooltipped {
+    position: relative;
     &::after {
         font-family: "Material Icons";
         content: "info";
         display: inline-block;
-        vertical-align: middle;
-        margin-bottom: 3px;
-        margin-left: 3px;
+        position: absolute;
+        right: 0;
+        margin: 0 auto;
     }
 }

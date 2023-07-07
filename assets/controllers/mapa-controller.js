@@ -33,32 +33,15 @@ const colors = [
     {light: "#b0bec5", dark: "#263238"},
 ]
 
-const distritos = {
-    "01": ["006", "020", "021", "060", "045"],
-    "02": ["011", "034", "043"],
-    "03": ["003", "030", "031", "039", "055", "054", "047", "046"],
-    "04": ["005"],
-    "05": ["001", "002", "024", "036", "040"],
-    "06": ["012", "014", "015", "019", "020", "055"],
-    "07": ["033"],
-    "08": ["009", "018", "026", "038", "050"],
-    "09": ["010", "052", "048"],
-    "10": ["013", "016", "035", "037"],
-    "11": ["004", "007", "008", "013"],
-    "12": ["049", "032", "051", "053", "029", "060", "022", "028", "051"],
-    "13": ["056", "023", "057", "044", "054"],
-    "14": ["042", "058", "059", "041", "017", "027"],
-    "15": ["025"]
-}
-
 export default class extends Controller {
     async initialize(){
+        this.distritos = [];
         useGeographic();
         this.element.classList.add('mapa-container');
         this.estadoLayer = new VectorLayer({
             source: new VectorSource({
                 format: new GeoJSON(),
-                url: "/geoJSON/mgem_29.geojson"
+                url: "/test/geojson/seccional/26"
             }),
             style: (feature) => {
                 return this.baseStyle(feature);
@@ -101,6 +84,7 @@ export default class extends Controller {
                 this.selected = null;
             }
             this.mapa.forEachFeatureAtPixel(e.pixel, (feature) => {
+                console.log(feature.get("MUNICIPIO"));
                 this.selected = feature;
                 this.selected.setStyle(this.selectedStyle(feature));
                 let geometry = this.selected.getGeometry();
@@ -117,9 +101,12 @@ export default class extends Controller {
      * @param {import("ol/Feature").FeatureLike} feature 
      */
     baseStyle(feature){
-        console.log(feature.get("cve_agem"));
-        let distrito = this.findDistrito(feature.get("cve_agem"));
-        let color = colors[Number(distrito)];
+        let municipio = feature.get("MUNICIPIO");
+        if (!this.distritos.includes(municipio)) {
+            this.distritos.push(municipio);
+            console.log(municipio);
+        };
+        let color = colors[this.distritos.indexOf(municipio) % colors.length];
         return new Style({
             fill: new Fill({ color: color.light }),
             stroke: new Stroke({ color: color.dark, width: 1 }),
@@ -127,7 +114,7 @@ export default class extends Controller {
                 font: "12px Calibri,sans-serif",
                 fill: new Fill({ color: "#000" }),
                 stroke: new Stroke({ color: "#fff", width: 1 }),
-                text: feature.get("nom_agem") + "\n" + feature.get("cve_agem")
+                text: (feature.get("NOMBRE") ?? feature.get("SECCION")).toString()
             })
         });
     }
@@ -143,7 +130,7 @@ export default class extends Controller {
                 font: "12px Calibri,sans-serif",
                 fill: new Fill({ color: "#000" }),
                 stroke: new Stroke({ color: "#fff", width: 1 }),
-                text: feature.get("nom_agem") + "\n" + feature.get("cve_agem")
+                text: (feature.get("NOMBRE") ?? feature.get("SECCION")).toString()
             })
         });
     }
@@ -159,7 +146,7 @@ export default class extends Controller {
                 font: "12px Calibri,sans-serif",
                 fill: new Fill({ color: "#a7ffeb" }),
                 stroke: new Stroke({ color: "#00bfa5", width: 1 }),
-                text: feature.get("nom_agem") + "\n" + feature.get("cve_agem")
+                text: (feature.get("NOMBRE") ?? feature.get("SECCION")).toString()
             })
         });
     }

@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% set sidebar = "yes" %}
+{% set shortcuts = "yes" %}
+
+{% block body %}
+    <div class="row">
+        <div class="col s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Promotores</span>
+                    <div 
+                        data-controller="super-list"
+                        data-super-list-url-value="/API/Promotor"
+                        data-super-list-token-value="{{app.session.get('api_token')}}"
+                        data-super-list-columnas-value='{
+                            "nombre": "Nombre(s)",
+                            "apellidoPaterno": "Apellido Paterno",
+                            "apellidoMaterno": "Apellido Materno",
+                            "telefono": "Teléfono"
+                        }'
+                        data-super-list-classes-value='["centered", "compact"]'
+                    ></div>
+                </div>
+                <div class="card-action right-align">
+                    <a href="/promotores/nuevo" class="btn"><i class="material-icons">add</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
